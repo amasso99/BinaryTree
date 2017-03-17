@@ -53,6 +53,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree() {
 		//TODO 01a
+		this.node = null;
 	}
 
 	/**
@@ -66,6 +67,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree(ContentType pContent) {
 		//TODO 01b
+		if(pContent != null) {
+			this.node = new BTNode<>(pContent);
+		}
 	}
 
 	/**
@@ -85,6 +89,11 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree(ContentType pContent, BinaryTree<ContentType> pLeftTree, BinaryTree<ContentType> pRightTree) {
 		//TODO 01c
+		if(pContent != null) {
+			this.node = new BTNode<>(pContent);
+			setLeftTree(pLeftTree);
+			setRightTree(pRightTree);
+		}
 	}
 
 	/**
@@ -95,7 +104,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public boolean isEmpty() {
 		//TODO 01d
-		return false;
+		return this.node == null;
 	}
 
 	/**
@@ -110,6 +119,13 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setContent(ContentType pContent) {
 		//TODO 01e
+		if(pContent != null){
+			if(isEmpty()){
+				node = new BTNode<>(pContent);
+			}else{
+				node.content = pContent;
+			}
+		}
 	}
 
 	/**
@@ -121,7 +137,10 @@ public class BinaryTree<ContentType> {
 	 */
 	public ContentType getContent() {
 		//TODO 01f
-		return null;
+		if(isEmpty()) {
+			return null;
+		}
+		return node.content;
 	}
 
 	/**
@@ -134,6 +153,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setLeftTree(BinaryTree<ContentType> pTree) {
 		//TODO 01g
+		if(pTree != null && !isEmpty()){
+			node.left = pTree;
+		}
 	}
 
 	/**
@@ -146,6 +168,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setRightTree(BinaryTree<ContentType> pTree) {
 		//TODO 01h
+		if(pTree != null && !isEmpty()){
+			node.right = pTree;
+		}
 	}
 
 	/**
@@ -157,6 +182,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree<ContentType> getLeftTree() {
 		//TODO 01i
+		if(!isEmpty()){
+			return node.left;
+		}
 		return null;
 	}
 
@@ -169,6 +197,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree<ContentType> getRightTree() {
 		//TODO 01j
+		if(!isEmpty()){
+			return node.right;
+		}
 		return null;
 	}
 

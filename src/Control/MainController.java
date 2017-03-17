@@ -22,12 +22,75 @@ public class MainController {
      */
     private void createMorseTree(){
         //TODO 02: Vervollständige des Morsebaum. Such bei google nach "morsecode as tree" als Vorlage. Das hilft, die Übersicht zu wahren.
-        BinaryTree<String> left = new BinaryTree<>("E");
-        BinaryTree<String> right = new BinaryTree<>("T");
+        BinaryTree<String> eRoot = new BinaryTree<>("E");
+        BinaryTree<String> tRoot = new BinaryTree<>("T");
+        binaryTree.setLeftTree(eRoot);
+        binaryTree.setRightTree(tRoot);
 
-        binaryTree.setLeftTree(left);
-        binaryTree.setRightTree(right);
+        BinaryTree<String> iRoot = new BinaryTree<>("I");
+        BinaryTree<String> aRoot = new BinaryTree<>("A");
+        eRoot.setRightTree(aRoot);
+        eRoot.setLeftTree(iRoot);
+
+        BinaryTree<String> sRoot = new BinaryTree<>("S");
+        BinaryTree<String> uRoot = new BinaryTree<>("U");
+        iRoot.setLeftTree(sRoot);
+        iRoot.setRightTree(uRoot);
+
+        BinaryTree<String> hRoot = new BinaryTree<>("H");
+        BinaryTree<String> vRoot = new BinaryTree<>("V");
+        sRoot.setLeftTree(hRoot);
+        sRoot.setRightTree(vRoot);
+
+        BinaryTree<String> fRoot = new BinaryTree<>("F");
+        uRoot.setLeftTree(fRoot);
+
+        BinaryTree<String> rRoot = new BinaryTree<>("R");
+        BinaryTree<String> wRoot = new BinaryTree<>("W");
+        aRoot.setLeftTree(rRoot);
+        aRoot.setRightTree(wRoot);
+
+        BinaryTree<String> lRoot = new BinaryTree<>("S");
+        rRoot.setLeftTree(lRoot);
+
+        BinaryTree<String> pRoot = new BinaryTree<>("P");
+        BinaryTree<String> jRoot = new BinaryTree<>("J");
+        wRoot.setLeftTree(pRoot);
+        wRoot.setRightTree(jRoot);
+
+        BinaryTree<String> nRoot = new BinaryTree<>("N");
+        BinaryTree<String> mRoot = new BinaryTree<>("M");
+        tRoot.setLeftTree(nRoot);
+        tRoot.setRightTree(mRoot);
+
+        BinaryTree<String> dRoot = new BinaryTree<>("D");
+        BinaryTree<String> kRoot = new BinaryTree<>("K");
+        nRoot.setLeftTree(dRoot);
+        nRoot.setRightTree(kRoot);
+
+        BinaryTree<String> bRoot = new BinaryTree<>("B");
+        BinaryTree<String> xRoot = new BinaryTree<>("X");
+        dRoot.setLeftTree(bRoot);
+        dRoot.setRightTree(xRoot);
+
+        BinaryTree<String> cRoot = new BinaryTree<>("C");
+        BinaryTree<String> yRoot = new BinaryTree<>("Y");
+        kRoot.setLeftTree(cRoot);
+        kRoot.setRightTree(yRoot);
+
+        BinaryTree<String> gRoot = new BinaryTree<>("G");
+        BinaryTree<String> oRoot = new BinaryTree<>("O");
+        mRoot.setLeftTree(gRoot);
+        mRoot.setRightTree(oRoot);
+
+        BinaryTree<String> zRoot = new BinaryTree<>("Z");
+        BinaryTree<String> qRoot = new BinaryTree<>("Q");
+        gRoot.setLeftTree(zRoot);
+        gRoot.setRightTree(qRoot);
+
+
     }
+
 
     /**
      * Der Baum wird im übergebenem Panel dargestellt.
@@ -39,7 +102,7 @@ public class MainController {
         panel.removeAllObjects();
         //Der Baum wird in der Mitte des Panels beginnend gezeichnet: panel.getWidth()/2
         //Der linke und rechte Knoten in Tiefe 1 sind jeweils ein Viertel der Breite des Panels entfernt.
-        showTree(binaryTree, panel, panel.getWidth()/2, 50, panel.getWidth()/4);
+        showTree(binaryTree, panel, panel.getWidth()/2, 20, panel.getWidth()/16);
     }
 
     /**
@@ -54,9 +117,12 @@ public class MainController {
      */
     private void showTree(BinaryTree tree, DrawingPanel panel, double startX, double startY, double spaceToTheSide) {
         //TODO 03: Vervollständige diese Methode. Aktuell wird nur der Wurzelknoten gezeichnet.
+
         if (!tree.isEmpty()) {
             TreeNode node = new TreeNode(startX, startY, 10, tree.getContent().toString(), false);
             panel.addObject(node);
+            showTree(tree.getLeftTree(),panel,startX-spaceToTheSide,startY+spaceToTheSide,spaceToTheSide);
+            showTree(tree.getRightTree(),panel,startX+spaceToTheSide,startY+spaceToTheSide,spaceToTheSide);
         }
     }
 
