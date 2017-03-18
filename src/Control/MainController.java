@@ -100,9 +100,7 @@ public class MainController {
      */
     public void showTree(DrawingPanel panel){
         panel.removeAllObjects();
-        //Der Baum wird in der Mitte des Panels beginnend gezeichnet: panel.getWidth()/2
-        //Der linke und rechte Knoten in Tiefe 1 sind jeweils ein Viertel der Breite des Panels entfernt.
-        showTree(binaryTree, panel, panel.getWidth()/2, 20, panel.getWidth()/16);
+        showTree(binaryTree, panel, panel.getWidth()/2, 20, panel.getWidth()/4);
     }
 
     /**
@@ -116,13 +114,27 @@ public class MainController {
      * @param spaceToTheSide Gibt an, wie weit horizontal entfernt die folgenden Bäume gezeichnet werden soll.
      */
     private void showTree(BinaryTree tree, DrawingPanel panel, double startX, double startY, double spaceToTheSide) {
-        //TODO 03: Vervollständige diese Methode. Aktuell wird nur der Wurzelknoten gezeichnet.
-
         if (!tree.isEmpty()) {
-            TreeNode node = new TreeNode(startX, startY, 10, tree.getContent().toString(), false);
+            int rad = 10;
+            TreeNode node = new TreeNode(startX, startY, rad, tree.getContent().toString(), false);
             panel.addObject(node);
-            showTree(tree.getLeftTree(),panel,startX-spaceToTheSide,startY+spaceToTheSide,spaceToTheSide);
-            showTree(tree.getRightTree(),panel,startX+spaceToTheSide,startY+spaceToTheSide,spaceToTheSide);
+
+            if(!tree.getLeftTree().isEmpty()) {
+                int lX = (int) (startX - spaceToTheSide);
+                int lY = (int) (startY + panel.getHeight() / 6);
+
+                panel.addObject(new TreePath(startX,startY, lX, lY,rad,false));
+                showTree(tree.getLeftTree(), panel, lX, lY, spaceToTheSide / 2);
+            }
+
+            if(!tree.getRightTree().isEmpty()) {
+                int rX = (int) (startX + spaceToTheSide);
+                int rY = (int) (startY + panel.getHeight() / 6);
+
+                panel.addObject(new TreePath(startX,startY, rX, rY,rad,false));
+                showTree(tree.getRightTree(),panel,rX,rY,spaceToTheSide/2);
+            }
+
         }
     }
 
