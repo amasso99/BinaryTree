@@ -2,13 +2,19 @@ package Control;
 
 import Model.BinaryTree;
 import View.DrawingPanel;
+import View.InteractableObject;
 import View.TreeView.TreeNode;
 import View.TreeView.TreePath;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by Jean-Pierre on 12.01.2017.
  */
-public class MainController {
+public class MainController implements InteractableObject{
 
     private BinaryTree<String> binaryTree;
 
@@ -154,6 +160,53 @@ public class MainController {
      */
     private String traverse(BinaryTree tree){
         //TODO 04: Nachdem wir geklärt haben, was eine Traversierung ist, muss diese Methode noch vervollständigt werden. Sollte ein Kinderspiel sein.
-        return "Traverse? Wat dat denn?";
+        //Preorder ist verboten #noMansSky
+        if (!tree.isEmpty()) {
+            return tree.getContent().toString() + traverse(tree.getLeftTree()) + traverse(tree.getRightTree());
+        }
+        return "";
+    }
+
+
+    @Override
+    public void keyPressed(int key) {
+
+    }
+
+    @Override
+    public void keyReleased(int key) {
+        if(KeyEvent.VK_SPACE == key){
+            translateMorseCode();
+        }
+    }
+
+    private void translateMorseCode() {
+        String morse = JOptionPane.showInputDialog("Type morsecode");
+        String[]codes = morse.split(" ");
+        String translation = "";
+
+        for (int i = 0; i < codes.length; i++) {
+            translation += interpretCode(codes[i]);
+        }
+
+    }
+
+    private String interpretCode(String code) {
+        return code;
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void draw(DrawingPanel dp, Graphics2D g2d) {
+
+    }
+
+    @Override
+    public void update(double dt) {
+
     }
 }

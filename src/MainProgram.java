@@ -40,6 +40,7 @@ public class MainProgram {
         // Erzeuge ein neues Fenster
         MainFrame mainFrame = new MainFrame(mainController, programTitle, x, y, windowWidth, windowHeight);
         mainFrame.setResizable(true);
+        mainFrame.getTopDrawingPanel().addObject(mainController);
     }
 
 }
